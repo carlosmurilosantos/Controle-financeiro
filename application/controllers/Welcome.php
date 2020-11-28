@@ -9,8 +9,8 @@ class Welcome extends CI_Controller {
 	}
 
 	public function login() {
-		$this->load->model('LoginModel', 'login');
-		$this->login->verifica();
+		 
+		die(print_r($_POST)); 
 		$this->load->view('common/cabecalho');
 		$this->load->view('access/login_form');
 		$this->load->view('common/rodape');
