@@ -11,6 +11,10 @@
             <input type="password" id="senha" name="senha" class="form-control mb-4" placeholder="Senha">
  
             <button class="btn btn-info btn-block my-4" type="submit">Enviar</button>
+
+            <p class="red-text"><?= $error ? 'Dados de acesso incorretos' : ''?></p> 
         </form>
+
+      
     </div>
 </div>
