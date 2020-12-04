@@ -2,12 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Home extends CI_Controller{
+class Home extends MY_Controller{
 
     public function index(){
-        $this->load->view('common/cabecalho');
-        $this->load->view('common/navbar');
-		$this->load->view('common/rodape');
+       $this->show('<h1>Seja bem vindo</h1>');
     }
 
 
