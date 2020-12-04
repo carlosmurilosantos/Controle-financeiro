@@ -6,7 +6,13 @@ class Conta extends CI_Object{
 
     public function cria($data){
         $this->db->insert('conta', $data);
+        return $this->db->insert_id();
     }
 
+    public function lista($tipo, $mes = 0, $ano = 0){
+        $data = ['tipo' => $tipo, 'mes' => $mes, 'ano' => $ano];
+        $res = $this->db->get_where('conta', $data);
+        return $res->result_array();
+    }
 
 }

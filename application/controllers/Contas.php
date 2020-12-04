@@ -14,6 +14,7 @@ class Contas extends MY_Controller{
 
         //recupera a lista de contas a pagar
         $v['lista'] = $this->conta->lista('pagar');
+        $v['tipo'] = 'pagar';
 
         //carrega a view e passa lista de contas
         $html = $this->load->view('contas/lista_contas', $v, true);

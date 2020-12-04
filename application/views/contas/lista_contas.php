@@ -6,6 +6,7 @@
             <input class="form-control" name="parceiro" type="text" placeholder="Devedor / Credor"><br>
             <input class="form-control" name="descricao" type="text" placeholder="Descrição"><br>
             <input class="form-control" name="valor" type="number" placeholder="Valor"><br><br>
+            <input type="hidden" name="tipo" value="<?= $tipo ?>"
 
             <div class="text-center text-md-left">
                 <a class="btn btn-primary" onclick="document.getElementById('contas-form').submit();">Send</a>
