@@ -8,15 +8,17 @@ class LoginModel extends CI_Model{
        
         if(sizeof($_POST) == 0) return 0; 
 
-        if(strcmp($_POST['email'], 'admin@admin.com') == 0)
-        if(strcmp($_POST['senha'], 'password') == 0){
-           redirect('home');
-            return 0;
-         
-        }
-        return 1;
-       
-        
-    }
+        $email = $this->input->post('email');
+        $senha = $this->input->post('senha');
 
+        $this->load->library('Login', '', 'acesso');
+        $k = $this->acesso->verifica($email, $senha);
+
+        if($k) {
+            redirect('home');
+        }
+        else  return 1;
+
+        } 
 }
+
