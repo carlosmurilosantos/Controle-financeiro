@@ -10,9 +10,23 @@ class ContasModel extends CI_Model{
 
     public function cria($tipo){
         if(sizeof($_POST) == 0) return;
-  
         $data = $this->input->post();
-        $this->bill->cria($data);
+        $this->validate();
+        
+        if($this->form_validation->run()){
+            $this->bill->cria($data);
+        }
+      
+        
+    }
+
+    private function validate(){
+         
+        $this->form_validation->set_rules('parceiro', 'Parceiro Comercial', 'required|min_length[5]|max_length[100]');
+        $this->form_validation->set_rules('descricao', 'Descriçao da conta', 'required|min_length[5]|max_length[100]');
+        $this->form_validation->set_rules('valor', 'Preço a ser pago', 'required|greater_than[0]');
+        $this->form_validation->set_rules('mes', 'Mês de pagamento', 'required|greater_than[0]|less_than[13]');
+        $this->form_validation->set_rules('ano', 'Ano de pagamento', 'required|greater_than[2019]|less_than[2031]');
     }
 
 
