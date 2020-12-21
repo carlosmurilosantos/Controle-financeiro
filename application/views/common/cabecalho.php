@@ -11,5 +11,7 @@
         <link rel="stylesheet" href="<?= base_url() ?>assets/mdb/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>assets/mdb/css/mdb.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>assets/mdb/css/style.css">
+
+        <script type="text/javascript" src="<?= base_url() ?>assets/mdb/js/jquery.min.js"></script>
     </head>
 <body>

@@ -53,3 +53,15 @@
                 </div>
             </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('.delete_btn').click(deleteRow);
+});
+
+ function deleteRow(){
+     var id = this.id;
+     $.post(api('sample', 'action_one'), {id}, function(d, s, x){console.log(x.responseText)}); 
+
+ }
+</script>

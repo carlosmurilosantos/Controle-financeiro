@@ -40,7 +40,7 @@ class ContasModel extends CI_Model{
             $aux['valor'] = $row['valor'];
             $aux['mes'] = $row['mes'];
             $aux['ano'] = $row['ano'];
-            $aux['btn'] = $this->getActionButton();
+            $aux['btn'] = $this->getActionButton($row['id']);
             $data[] = $aux;
         }
 
@@ -51,9 +51,9 @@ class ContasModel extends CI_Model{
       
    }
 
-   private function getActionButton(){
-       $html = '<a><i class="fas fa-edit mr-2 text-primary"></i></a>';
-       $html .= '<a><i class="fas fa-times mr-2 red-text"></i></a>';
+   private function getActionButton($id){
+       $html = '<a><i id="'.$id.'" class="fas fa-edit mr-2 text-primary edit_btn"></i></a>';
+       $html .= '<a><i id="'.$id.'" class="fas fa-times mr-2 red-text delete_btn"></i></a>';
        return $html;
    }
    

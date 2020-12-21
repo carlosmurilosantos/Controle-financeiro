@@ -15,4 +15,10 @@ class Conta extends CI_Object{
         return $res->result_array();
     }
 
+    public function delete($data){
+        $this->db->delete('conta', $data);
+    }
+
+     
+
 }
