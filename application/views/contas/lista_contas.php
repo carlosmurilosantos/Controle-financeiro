@@ -61,7 +61,6 @@ $(document).ready(function(){
 
  function deleteRow(){
      var id = this.id;
-     $.post(api('sample', 'action_one'), {id}, function(d, s, x){console.log(x.responseText)}); 
-
+     $.post(api('sample', 'action_one'), {id}, function(d,s,x){console.log(x.responseText)});
  }
 </script>

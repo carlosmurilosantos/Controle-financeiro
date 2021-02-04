@@ -9,8 +9,8 @@
  * @returns {String} 
  */
 function baseURL(uri) {
-    return 'http//' + window.location.hostname +
-        '/lp2/murilo/' + (uri ? '/' + uri : '');
+    return 'http://' + window.location.hostname +
+        '/lp2/murilo' + (uri ? '/' + uri : '');
 }
 
 function api(ctrl, func) {
