@@ -54,13 +54,56 @@
             </div>
 </div>
 
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remoção de Contas</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Deseja realmente remover esta conta? Essa ação é irreversivel</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" id="confirmBtn" class="btn btn-primary">Deletar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+row_id = 0;
+
 $(document).ready(function(){
-    $('.delete_btn').click(deleteRow);
+    $('.delete_btn').click(openModal);
+    $('#confirmBtn').click(deleteRow);
 });
 
+function openModal(){
+    row_id = this.id;
+    $('#exampleModal').modal();
+}
+
  function deleteRow(){
-     var id = this.id;
+     var id = row_id;
      $.post(api('sample', 'action_one'), {id}, function(d,s,x){console.log(x.responseText)});
- }
+     $('#'+row_id).parent().parent().parent().remove();
+     $('#exampleModal').modal('hide');
+}
 </script>
