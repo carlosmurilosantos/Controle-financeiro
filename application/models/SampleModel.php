@@ -7,14 +7,14 @@ class SampleModel extends CI_Model{
 
     public function action_one(){
         $this->load->library('conta');
-        $data  = $this->input->post();
+        $data = $this->input->post();
         $this->conta->delete($data);
+     }
+ 
+    public function action_two(){
+
+
+    }
+
 }
-
-    public function action_two()
-    {
-
-
-}
-
-}
+?>

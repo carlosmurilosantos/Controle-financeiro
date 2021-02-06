@@ -19,6 +19,9 @@ class Conta extends CI_Object{
         $this->db->delete('conta', $data);
     }
 
+    public function edita($data){
+        $this->db->update('conta', $data,'id ='.$data['id']); 
+    }
      
 
 }

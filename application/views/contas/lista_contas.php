@@ -12,26 +12,27 @@
         <?php echo form_error('ano', '<div class="alert alert-danger">', '</div>'); ?>
         <?php echo form_error('mes', '<div class="alert alert-danger">', '</div>'); ?>
 
-        <div class="collapse" id="collapseExample">
+        <div class="collapse" id="collapseForm">
 
 
             <div class="row">
                 <div class="col-md-6 mx-auto border mt-5 pt-3 pb-3">
             <form method="POST" id="contas-form"> 
 
-            <input class="form-control" value="<?= set_value('parceiro') ?> " name="parceiro" type="text" placeholder="Devedor / Credor"><br>
-            <input class="form-control" value="<?= set_value('descricao')?> " name="descricao" type="text" placeholder="Descrição"><br>
-            <input class="form-control" value="<?= set_value('valor')?> " name="valor" type="number" placeholder="Valor"><br><br>
+            <input class="form-control" value="<?= set_value('parceiro') ?> " name="parceiro" id="parceiro" type="text" placeholder="Devedor / Credor"><br>
+            <input class="form-control" value="<?= set_value('descricao')?> " name="descricao" id="descricao" type="text" placeholder="Descrição"><br>
+            <input class="form-control" value="<?= set_value('valor')?> " name="valor" id="valor" type="number" placeholder="Valor"><br><br>
 
             <div class="row">
                 <div class="col-md-6">
-                    <input class="form-control" value="<?= set_value('mes')?> " name="mes" type="number" placeholder="Mês">
+                    <input class="form-control" value="<?= set_value('mes')?> " id="mes" name="mes" type="number" placeholder="Mês">
                 </div>    
                 <div class="col-md-6">
-                    <input class="form-control" value="<?= set_value('ano')?> " name="ano" type="number" placeholder="Mês">
+                    <input class="form-control" value="<?= set_value('ano')?> " id="ano" name="ano" type="number" placeholder="Mês">
                 </div>   
             </div>
 
+            <input type="hidden" name="id" id="conta_id">
             <input type="hidden" name="tipo" value="<?= $tipo ?>"><br>
  
   
@@ -93,7 +94,23 @@ row_id = 0;
 $(document).ready(function(){
     $('.delete_btn').click(openModal);
     $('#confirmBtn').click(deleteRow);
+    $('.edit_btn').click(exibeForm);
+    $('.pay_btn').click(liquidaConta);
 });
+
+function exibeForm(){
+    var row_id = this.id;
+    var td = $('#'+row_id).parent().parent().parent().children();
+
+    $('#parceiro').val($(td[0]).text());
+    $('#descricao').val($(td[1]).text());
+    $('#valor').val($(td[2]).text());
+    $('#mes').val($(td[3]).text());
+    $('#ano').val($(td[4]).text());
+    $('#conta_id').val(row_id);
+    $('#collapseForm').collapse('show');
+}
+
 
 function openModal(){
     row_id = this.id;
@@ -102,8 +119,16 @@ function openModal(){
 
  function deleteRow(){
      var id = row_id;
-     $.post(api('sample', 'action_one'), {id}, function(d,s,x){console.log(x.responseText)});
+     $.post(api('contas', 'delete_conta'), {id}, function(d,s,x){console.log(x.responseText)});
      $('#'+row_id).parent().parent().parent().remove();
      $('#exampleModal').modal('hide');
 }
+
+function liquidaConta(){
+    var id = this.id;
+    $.post(api('contas', 'status_conta'), {id}, function(d,s,x){
+    console.log(d); 
+    });
+}
+ 
 </script>
