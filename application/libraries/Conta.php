@@ -23,5 +23,9 @@ class Conta extends CI_Object{
         $this->db->update('conta', $data,'id ='.$data['id']); 
     }
      
-
+    public function status($data){
+        $sql = "UPDATE conta SET liquidada = liquidada + 1 WHERE id = ".$data['id'];
+        $this->db->query($sql);
+         
+    }
 }

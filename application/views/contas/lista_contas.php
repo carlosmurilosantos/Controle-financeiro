@@ -127,7 +127,7 @@ function openModal(){
 function liquidaConta(){
     var id = this.id;
     $.post(api('contas', 'status_conta'), {id}, function(d,s,x){
-    console.log(d); 
+        $('#' + id).toggleClass('text-muted green-text');
     });
 }
  

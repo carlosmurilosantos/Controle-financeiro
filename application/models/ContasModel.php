@@ -55,20 +55,20 @@ class ContasModel extends CI_Model{
    }
 
         private function getActionButton($id){
-            $html = '<a><i id="'.$id.'" class="far fa-check-circle mr-3 text-muted pay_btn"></i></a>'; 
+            $html = '<a><i id="'.$id.'" class="fas fa-check-circle mr-3 text-muted pay_btn"></i></a>'; 
             $html .= '<a><i id="'.$id.'" class="far fa-edit mr-3 text-primary edit_btn"></i></a>';
             $html .= '<a><i id="'.$id.'" class="fas fa-times red-text delete_btn"></i></a>';
             return $html;
         }
 
         public function delete_conta(){
-            $this->load->library('conta');
+          
             $data  = $this->input->post();
             $this->bill->delete($data);
         }
 
         public function status_conta(){
-            $this->load->library('conta');
+             
             $data  = $this->input->post();
             $this->bill->status($data);
         }
