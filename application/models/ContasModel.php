@@ -10,10 +10,13 @@ class ContasModel extends CI_Model{
 
     public function cria($tipo){
         if(sizeof($_POST) == 0) return;
+
         $data = $this->input->post();
-
         list($ano, $mes) = explode('-', $data['month']);
+        $_POST['ano'] = $ano;
+        $_POST['mes'] = $mes;
 
+        $data = $this->input->post();
         $this->validate();
         
         if($this->form_validation->run()){
@@ -37,7 +40,7 @@ class ContasModel extends CI_Model{
 
 
     public function lista($tipo, $mes, $ano){
-        $v = $this->bill->lista('pagar', $mes, $ano);
+        $v = $this->bill->lista($tipo, $mes, $ano);
         $data = [];
 
         foreach ($v as $row) {

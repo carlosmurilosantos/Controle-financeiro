@@ -5,6 +5,7 @@ include_once APPPATH.'libraries/util/CI_Object.php';
 class Conta extends CI_Object{
 
     public function cria($data){
+        unset($data['month']); 
         $this->db->insert('conta', $data);
         return $this->db->insert_id();
     }
@@ -20,6 +21,7 @@ class Conta extends CI_Object{
     }
 
     public function edita($data){
+        unset($data['month']); 
         $this->db->update('conta', $data,'id ='.$data['id']); 
     }
      
