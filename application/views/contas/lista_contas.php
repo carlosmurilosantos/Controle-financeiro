@@ -1,10 +1,15 @@
 <div class="container">
  
-        <div class="mt-4">
-          <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <div class="row mt-5">
+            <div class="col-md-2">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
             Nova conta
-          </a>
+            </a>
         </div>
+         <div class="col-md-2 offset-md-7 mt-3">
+         <input type="month" id="month" name="month" value="<?= set_value('month')?>">
+         </div> 
+      </div>
   
         <?php echo form_error('parceiro', '<div class="alert alert-danger">', '</div>'); ?>
         <?php echo form_error('descricao', '<div class="alert alert-danger">', '</div>'); ?>
@@ -22,15 +27,6 @@
             <input class="form-control" value="<?= set_value('parceiro') ?> " name="parceiro" id="parceiro" type="text" placeholder="Devedor / Credor"><br>
             <input class="form-control" value="<?= set_value('descricao')?> " name="descricao" id="descricao" type="text" placeholder="Descrição"><br>
             <input class="form-control" value="<?= set_value('valor')?> " name="valor" id="valor" type="number" placeholder="Valor"><br><br>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <input class="form-control" value="<?= set_value('mes')?> " id="mes" name="mes" type="number" placeholder="Mês">
-                </div>    
-                <div class="col-md-6">
-                    <input class="form-control" value="<?= set_value('ano')?> " id="ano" name="ano" type="number" placeholder="Mês">
-                </div>   
-            </div>
 
             <input type="hidden" name="id" id="conta_id">
             <input type="hidden" name="tipo" value="<?= $tipo ?>"><br>
@@ -92,11 +88,23 @@
 row_id = 0;
 
 $(document).ready(function(){
+    $('#month').change(loadMonth);
     $('.delete_btn').click(openModal);
     $('#confirmBtn').click(deleteRow);
     $('.edit_btn').click(exibeForm);
     $('.pay_btn').click(liquidaConta);
 });
+
+function loadMonth(){
+  var data = this.value.split('-');
+  var ano = data[0];
+  var mes = data[1];
+
+  var v = window.location.href.split('/');
+  var url = v.slice(0, 7).join('/');
+  url = url + '/' + mes + '/' + ano;
+  window.location.href = url;
+}
 
 function exibeForm(){
     var row_id = this.id;

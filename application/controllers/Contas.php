@@ -8,12 +8,17 @@ class Contas extends MY_Controller{
     }
 
     public function pagar($mes = 0, $ano = 0){
+        $mes = $mes ? $mes : date('m');
+        $ano = $ano ? $ano : date('Y');
+        $_POST['month'] = "$ano-$mes";
+
         //salva os dados da nova conta caso exista
         $this->load->model('ContasModel', 'conta');
         $this->conta->cria('cria');
 
         //recupera a lista de contas a pagar
-        $v['lista'] = $this->conta->lista('pagar');
+        $v['lista'] = $this->conta->lista('pagar', $mes, $ano);
+      
         $v['tipo'] = 'pagar';
 
         //carrega a view e passa lista de contas

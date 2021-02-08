@@ -11,6 +11,9 @@ class ContasModel extends CI_Model{
     public function cria($tipo){
         if(sizeof($_POST) == 0) return;
         $data = $this->input->post();
+
+        list($ano, $mes) = explode('-', $data['month']);
+
         $this->validate();
         
         if($this->form_validation->run()){
@@ -33,9 +36,9 @@ class ContasModel extends CI_Model{
     }
 
 
-    public function lista($tipo){
+    public function lista($tipo, $mes, $ano){
+        $v = $this->bill->lista('pagar', $mes, $ano);
         $data = [];
-        $v = $this->bill->lista('pagar', 9, 2020);
 
         foreach ($v as $row) {
             $aux['parceiro'] = $row['parceiro'];
@@ -43,7 +46,7 @@ class ContasModel extends CI_Model{
             $aux['valor'] = $row['valor'];
             $aux['mes'] = $row['mes'];
             $aux['ano'] = $row['ano'];
-            $aux['btn'] = $this->getActionButton($row['id']);
+            $aux['btn'] = $this->getActionButton($row);
             $data[] = $aux;
         }
 
@@ -54,10 +57,11 @@ class ContasModel extends CI_Model{
       
    }
 
-        private function getActionButton($id){
-            $html = '<a><i id="'.$id.'" class="fas fa-check-circle mr-3 text-muted pay_btn"></i></a>'; 
-            $html .= '<a><i id="'.$id.'" class="far fa-edit mr-3 text-primary edit_btn"></i></a>';
-            $html .= '<a><i id="'.$id.'" class="fas fa-times red-text delete_btn"></i></a>';
+        private function getActionButton($row){
+            $cor = $row['liquidada'] % 2 ? 'green-text' : 'text-muted';
+            $html = '<a><i id="'.$row['id'].'" class="fas fa-check-circle mr-3 '.$cor.' pay_btn"></i></a>'; 
+            $html .= '<a><i id="'.$row['id'].'" class="far fa-edit mr-3 text-primary edit_btn"></i></a>';
+            $html .= '<a><i id="'.$row['id'].'" class="fas fa-times red-text delete_btn"></i></a>';
             return $html;
         }
 
