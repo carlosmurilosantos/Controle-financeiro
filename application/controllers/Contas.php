@@ -12,19 +12,16 @@ class Contas extends MY_Controller{
         $ano = $ano ? $ano : date('Y');
         $_POST['month'] = "$ano-$mes";
 
-        //salva os dados da nova conta caso exista
         $this->load->model('ContasModel', 'conta');
         $this->conta->cria('cria');
-
-        //recupera a lista de contas a pagar
+ 
         $v['lista'] = $this->conta->lista('pagar', $mes, $ano);
       
         $v['tipo'] = 'pagar';
 
-        //carrega a view e passa lista de contas
+    
         $html = $this->load->view('contas/lista_contas', $v, true);
-
-        // exibe esta view
+ 
         $this->show($html);
     }
 
@@ -32,18 +29,16 @@ class Contas extends MY_Controller{
 
     public function receber($mes = 0, $ano = 0){
         
-        //salva os dados da nova conta caso exista
+     
         $this->load->model('ContasModel', 'conta');
         $this->conta->cria('receber');
 
-        //recupera a lista de contas a pagar
+         
         $v['lista'] = $this->conta->lista('receber', $mes, $ano);
         $v['tipo'] = 'receber';
-
-        //carrega a view e passa lista de contas
+ 
         $html = $this->load->view('contas/lista_contas', $v, true);
-
-        // exibe esta view
+ 
         $this->show($html);
 
 
